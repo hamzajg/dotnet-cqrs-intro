@@ -1,5 +1,4 @@
 using Marten;
-using Marten.Services;
 using Microsoft.Extensions.DependencyInjection;
 using SeparateModels.Domain;
 
@@ -16,27 +15,14 @@ namespace SeparateModels.DataAccess.Marten
 
         private static IDocumentStore CreateDocumentStore(string cn)
         {
-            return DocumentStore.For(_ =>
+            return DocumentStore.For(opts =>
             {
-                _.Connection(cn);
-                _.Serializer(CustomizeJsonSerializer());
+                opts.Connection(cn);
 
-                _.Schema.For<Policy>().DocumentAlias("policy_agg").Duplicate(t => t.Number,pgType: "varchar(50)", configure: idx => idx.IsUnique = true);
-                _.Schema.For<Offer>().DocumentAlias("offer_agg").Duplicate(t => t.Number,pgType: "varchar(50)", configure: idx => idx.IsUnique = true);
-                _.Schema.For<Product>().DocumentAlias("product_agg").Duplicate(t => t.Code,pgType: "varchar(50)", configure: idx => idx.IsUnique = true);
+                opts.Schema.For<Policy>().Index(idx => idx.Number, index => index.IsUnique = true);
+                opts.Schema.For<Offer>().Index(idx => idx.Number, index => index.IsUnique = true);
+                opts.Schema.For<Product>().Index(idx => idx.Code, index => index.IsUnique = true);
             });
-        }
-
-        private static JsonNetSerializer CustomizeJsonSerializer()
-        {
-            var serializer = new JsonNetSerializer();
-
-            serializer.Customize(_ =>
-            {
-                _.ContractResolver = new ProtectedSettersContractResolver();
-            });
-
-            return serializer;
         }
     }
 }

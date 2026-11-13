@@ -1,11 +1,10 @@
 using System.Linq;
 using Dapper;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Npgsql;
 
 namespace SeparateModels.ReadModels
 {
-    public class PolicyVersionDtoFinder
+    public class PolicyVersionDtoFinder : IPolicyVersionDtoFinder
     {
         private readonly string cnString;
 

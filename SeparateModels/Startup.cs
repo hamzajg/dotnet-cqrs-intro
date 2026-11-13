@@ -1,14 +1,12 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SeparateModels.DataAccess.Marten;
+using Microsoft.Extensions.Hosting;
 using SeparateModels.Init;
 using SeparateModels.Installers;
 using SeparateModels.ReadModels;
-using SeparateModels.Services;
 
 namespace SeparateModels
 {
@@ -21,17 +19,16 @@ namespace SeparateModels
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMediatR();
-            services.AddMarten(Configuration.GetConnectionString("DefaultConnection"));
-            services.AddReadModels(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddControllers();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly));
+
+            services.AddStorage(Configuration);
+            services.AddReadModels(Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -42,9 +39,10 @@ namespace SeparateModels
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
-            app.UseDbInitializer();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            app.UseDbInitializer().GetAwaiter().GetResult();
         }
     }
 }

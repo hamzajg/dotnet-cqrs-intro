@@ -37,3 +37,31 @@ We live in a world of dynamically changing technologies. New ways of architectur
 <p align="center">
     <img alt="Event Sourcing" src="https://raw.githubusercontent.com/asc-lab/dotnet-cqrs-intro/master/readme-images/5_event_sourcing.png" />
 </p>
+
+## Running locally without a database server
+
+The solution targets **.NET 10** and defaults to an in-memory storage profile, so
+`dotnet run` works on a clean machine with no PostgreSQL, no Docker and no
+connection strings:
+
+```bash
+dotnet run --project CqrsWithEs        # event-sourced, in-memory event store + read model
+dotnet run --project SeparateModels    # Marten-style domain, in-memory write store + read models
+dotnet run --project NoCqrs            # EF Core in-memory
+dotnet test                            # 30 tests, none of them need a server
+```
+
+Each app reads `Storage:Provider` from configuration:
+
+| value | meaning |
+|---|---|
+| `InMemory` (default) | everything is held in process memory and disappears on exit |
+| `Marten` / `Postgres` | uses the `DefaultConnection` connection string and a real PostgreSQL server |
+
+```bash
+Storage__Provider=Postgres dotnet run --project CqrsWithEs
+```
+
+In `SeparateModels` the `Marten` profile keeps the document store (Marten 9);
+the in-memory profile uses `IDataStore`/read-model implementations that mirror
+the same tables, so switching profiles does not change the application code.

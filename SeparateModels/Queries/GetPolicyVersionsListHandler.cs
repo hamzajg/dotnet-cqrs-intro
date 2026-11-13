@@ -7,9 +7,9 @@ namespace SeparateModels.Queries
 {
     public class GetPolicyVersionsListHandler : IRequestHandler<GetPolicyVersionsListQuery, GetPolicyVersionsListResult>
     {
-        private readonly PolicyVersionDtoFinder policyVersionDtoFinder;
+        private readonly IPolicyVersionDtoFinder policyVersionDtoFinder;
 
-        public GetPolicyVersionsListHandler(PolicyVersionDtoFinder policyVersionDtoFinder)
+        public GetPolicyVersionsListHandler(IPolicyVersionDtoFinder policyVersionDtoFinder)
         {
             this.policyVersionDtoFinder = policyVersionDtoFinder;
         }

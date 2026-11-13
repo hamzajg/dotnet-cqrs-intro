@@ -1,12 +1,11 @@
 using System;
 using Dapper;
-using Marten.Linq.MatchesSql;
 using Npgsql;
 using SeparateModels.Domain;
 
 namespace SeparateModels.ReadModels
 {
-    public class PolicyVersionDtoProjection
+    public class PolicyVersionDtoProjection : IPolicyVersionDtoProjection
     {
         private readonly string cnString;
 

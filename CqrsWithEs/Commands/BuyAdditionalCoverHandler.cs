@@ -5,6 +5,7 @@ using CqrsWithEs.Domain.Offer;
 using CqrsWithEs.Domain.Policy;
 using CqrsWithEs.Domain.Product;
 using MediatR;
+using NodaMoney;
 
 namespace CqrsWithEs.Commands
 {
@@ -24,7 +25,7 @@ namespace CqrsWithEs.Commands
             policy.ExtendCoverage
             (
                 request.EffectiveDateOfChange, 
-                new CoverPrice(request.NewCoverCode, request.NewCoverPrice, request.NewCoverPriceUnit)
+                new CoverPrice(request.NewCoverCode, Money.Euro(request.NewCoverPrice), request.NewCoverPriceUnit)
             );
             
             policyRepository.Save(policy, policy.Version);

@@ -13,9 +13,9 @@ namespace SeparateModels.Queries
 {
     public class FindPoliciesHandler : IRequestHandler<FindPoliciesQuery, IList<PolicyInfoDto>>
     {
-        private readonly PolicyInfoDtoFinder policyInfoDtoFinder;
+        private readonly IPolicyInfoDtoFinder policyInfoDtoFinder;
         
-        public FindPoliciesHandler(PolicyInfoDtoFinder policyInfoDtoFinder)
+        public FindPoliciesHandler(IPolicyInfoDtoFinder policyInfoDtoFinder)
         {
             this.policyInfoDtoFinder = policyInfoDtoFinder;
         }

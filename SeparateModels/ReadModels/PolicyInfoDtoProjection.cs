@@ -5,7 +5,7 @@ using SeparateModels.Domain;
 
 namespace SeparateModels.ReadModels
 {
-    public class PolicyInfoDtoProjection
+    public class PolicyInfoDtoProjection : IPolicyInfoDtoProjection
     {
         private readonly string cnString;
 
