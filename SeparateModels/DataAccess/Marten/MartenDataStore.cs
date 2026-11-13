@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Marten;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SeparateModels.Domain;
 
 namespace SeparateModels.DataAccess.Marten
@@ -20,7 +19,7 @@ namespace SeparateModels.DataAccess.Marten
         
         public MartenDataStore(IDocumentStore documentStore)
         {
-            session = documentStore.DirtyTrackedSession();
+            session = documentStore.LightweightSession();
             Products = new ProductRepository(session);
             Offers = new OfferRepository(session);
             Policies = new PolicyRepository(session);

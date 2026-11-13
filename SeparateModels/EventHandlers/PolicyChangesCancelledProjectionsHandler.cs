@@ -9,10 +9,10 @@ namespace SeparateModels.EventHandlers
     public class PolicyChangesCancelledProjectionsHandler :
         INotificationHandler<PolicyAnnexCancelled>
     {
-        private readonly PolicyInfoDtoProjection policyInfoDtoProjection;
-        private readonly PolicyVersionDtoProjection policyVersionDtoProjection;
+        private readonly IPolicyInfoDtoProjection policyInfoDtoProjection;
+        private readonly IPolicyVersionDtoProjection policyVersionDtoProjection;
 
-        public PolicyChangesCancelledProjectionsHandler(PolicyInfoDtoProjection policyInfoDtoProjection, PolicyVersionDtoProjection policyVersionDtoProjection)
+        public PolicyChangesCancelledProjectionsHandler(IPolicyInfoDtoProjection policyInfoDtoProjection, IPolicyVersionDtoProjection policyVersionDtoProjection)
         {
             this.policyInfoDtoProjection = policyInfoDtoProjection;
             this.policyVersionDtoProjection = policyVersionDtoProjection;

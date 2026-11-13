@@ -7,7 +7,7 @@ using static System.String;
 
 namespace SeparateModels.ReadModels
 {
-    public class PolicyInfoDtoFinder
+    public class PolicyInfoDtoFinder : IPolicyInfoDtoFinder
     {
         private readonly string cnString;
 

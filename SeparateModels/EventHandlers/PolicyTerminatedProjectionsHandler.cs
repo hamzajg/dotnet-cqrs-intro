@@ -8,10 +8,10 @@ namespace SeparateModels.EventHandlers
 {
     public class PolicyTerminatedProjectionsHandler : INotificationHandler<PolicyTerminated>
     {
-        private readonly PolicyInfoDtoProjection policyInfoDtoProjection;
-        private readonly PolicyVersionDtoProjection policyVersionDtoProjection;
+        private readonly IPolicyInfoDtoProjection policyInfoDtoProjection;
+        private readonly IPolicyVersionDtoProjection policyVersionDtoProjection;
 
-        public PolicyTerminatedProjectionsHandler(PolicyInfoDtoProjection policyInfoDtoProjection, PolicyVersionDtoProjection policyVersionDtoProjection)
+        public PolicyTerminatedProjectionsHandler(IPolicyInfoDtoProjection policyInfoDtoProjection, IPolicyVersionDtoProjection policyVersionDtoProjection)
         {
             this.policyInfoDtoProjection = policyInfoDtoProjection;
             this.policyVersionDtoProjection = policyVersionDtoProjection;

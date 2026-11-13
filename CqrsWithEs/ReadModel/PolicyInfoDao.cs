@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace CqrsWithEs.ReadModel
 {
-    public class PolicyInfoDao
+    public class PolicyInfoDao : IPolicyInfoDao
     {
         private readonly string cnString;
 

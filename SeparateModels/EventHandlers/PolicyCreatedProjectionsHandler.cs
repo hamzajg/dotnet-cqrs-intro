@@ -13,10 +13,10 @@ namespace SeparateModels.EventHandlers
     public class PolicyCreatedProjectionsHandler : 
         INotificationHandler<PolicyCreated>
     {
-        private readonly PolicyInfoDtoProjection policyInfoDtoProjection;
-        private readonly PolicyVersionDtoProjection policyVersionDtoProjection;
+        private readonly IPolicyInfoDtoProjection policyInfoDtoProjection;
+        private readonly IPolicyVersionDtoProjection policyVersionDtoProjection;
 
-        public PolicyCreatedProjectionsHandler(PolicyInfoDtoProjection policyInfoDtoProjection, PolicyVersionDtoProjection policyVersionDtoProjection)
+        public PolicyCreatedProjectionsHandler(IPolicyInfoDtoProjection policyInfoDtoProjection, IPolicyVersionDtoProjection policyVersionDtoProjection)
         {
             this.policyInfoDtoProjection = policyInfoDtoProjection;
             this.policyVersionDtoProjection = policyVersionDtoProjection;

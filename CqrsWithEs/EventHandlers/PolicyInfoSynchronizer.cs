@@ -13,9 +13,9 @@ namespace CqrsWithEs.EventHandlers
         INotificationHandler<CoverageExtendedPolicyVersionConfirmed>,
         INotificationHandler<TerminalPolicyVersionConfirmed>
     {
-        private readonly PolicyInfoDao policyInfoDao;
+        private readonly IPolicyInfoDao policyInfoDao;
 
-        public PolicyInfoSynchronizer(PolicyInfoDao policyInfoDao)
+        public PolicyInfoSynchronizer(IPolicyInfoDao policyInfoDao)
         {
             this.policyInfoDao = policyInfoDao;
         }
